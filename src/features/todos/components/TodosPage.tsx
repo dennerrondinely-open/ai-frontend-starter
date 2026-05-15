@@ -1,11 +1,14 @@
 import { TodoForm } from '@/features/todos/components/TodoForm';
 import { TodoList } from '@/features/todos/components/TodoList';
+import { TodoSearchInput } from '@/features/todos/components/TodoSearchInput';
 import { useTodosUiStore } from '@/features/todos/store';
+import { Route as TodosRoute } from '@/routes/todos';
 import { cn } from '@/shared/lib/cn';
 
 const filters = ['all', 'active', 'completed'] as const;
 
 export function TodosPage() {
+  const { q } = TodosRoute.useSearch();
   const filter = useTodosUiStore((s) => s.filter);
   const setFilter = useTodosUiStore((s) => s.setFilter);
 
@@ -18,6 +21,7 @@ export function TodosPage() {
         </p>
       </header>
       <TodoForm />
+      <TodoSearchInput />
       <nav aria-label="Filtros" className="flex gap-2">
         {filters.map((f) => (
           <button
@@ -33,7 +37,7 @@ export function TodosPage() {
           </button>
         ))}
       </nav>
-      <TodoList />
+      <TodoList query={q} />
     </section>
   );
 }

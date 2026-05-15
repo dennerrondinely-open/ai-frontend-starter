@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+  title: AI Frontend Starter — Example API
+  description: |
+    OpenAPI spec mínimo para demonstrar geração de tipos/hooks via Orval.
+    Substitua por sua spec real e rode `npm run api:gen`.
+  version: 0.1.0
+servers:
+  - url: http://localhost:3000
+    description: Local mock
+paths:
+  /todos:
+    get:
+      summary: Lista todos
+      operationId: listTodos
+      tags: [todos]
+      responses:
+        '200':
+          description: Lista de todos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+    post:
+      summary: Cria todo
+      operationId: createTodo
+      tags: [todos]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodoInput'
+      responses:
+        '201':
+          description: Criado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+  /todos/{id}:
+    get:
+      summary: Busca todo por id
+      operationId: getTodo
+      tags: [todos]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Todo encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+        '404':
+          description: Não encontrado
+components:
+  schemas:
+    Todo:
+      type: object
+      required: [id, title, completed]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200
+        completed:
+          type: boolean
+    CreateTodoInput:
+      type: object
+      required: [title]
+      properties:
+        title:
+          type: string
+          minLength: 1
+          maxLength: 200

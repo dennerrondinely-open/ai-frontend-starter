@@ -19,7 +19,8 @@ Você produz specs de feature seguindo o padrão Spec-Driven Development do proj
    - Permissões/auth?
    - Comportamento offline?
 5. Escreva o spec.md e salve.
-6. Reporte o caminho + lista resumida de pontos a clarificar.
+6. Atualize `specs/INDEX.md` para incluir a nova spec na seção "Draft" (ou rode `/specs-index` para regenerar).
+7. Reporte o caminho + lista resumida de pontos a clarificar.
 
 ## Princípios
 

@@ -9,11 +9,12 @@ Descrição da feature: $ARGUMENTS
 
 ## Passos
 
-1. Liste `specs/` e identifique o próximo número (NNN) disponível (zero-padded, 3 dígitos).
+1. Liste `specs/` E `specs/archive/` recursivamente. Próximo NNN = `max(NNN existente em ambos) + 1`, zero-padded com 3 dígitos.
 2. Gere um slug em kebab-case curto a partir da descrição.
 3. Crie o diretório `specs/NNN-<slug>/`.
 4. Escreva `specs/NNN-<slug>/spec.md` seguindo a estrutura abaixo.
-5. Reporte o caminho criado e os pontos de incerteza marcados como `[NEEDS CLARIFICATION: ...]`.
+5. Atualize `specs/INDEX.md` adicionando a nova entrada na seção "Draft" (mantendo ordem decrescente por NNN).
+6. Reporte o caminho criado e os pontos de incerteza marcados como `[NEEDS CLARIFICATION: ...]`.
 
 ## Estrutura obrigatória do spec.md
 

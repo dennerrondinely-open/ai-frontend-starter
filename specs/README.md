@@ -1,6 +1,6 @@
 # Specs — Spec-Driven Development
 
-Cada feature passa por 4 artefatos antes de ser implementada:
+Cada feature passa por 3 artefatos antes de ser implementada:
 
 ```
 specs/NNN-slug/
@@ -8,6 +8,11 @@ specs/NNN-slug/
 ├── plan.md     # HOW técnico (estrutura, schemas, rotas, testes)
 └── tasks.md    # Checklist executável task-a-task
 ```
+
+## Navegação
+
+- [`INDEX.md`](INDEX.md) — visão por status (in-progress, approved, draft, done, archived). Regerado por `/specs-index`.
+- [`archive/`](archive/) — specs done há > 30 dias ou abandoned, agrupadas por trimestre. Veja [archive/README.md](archive/README.md).
 
 ## Fluxo
 
@@ -19,9 +24,16 @@ specs/NNN-slug/
 /tasks
    ↓ (humano revisa granularidade)
 /implement   (executa UMA task; rode N vezes até terminar)
+   ↓ (após Status: done há > 30 dias)
+/specs-archive [NNN-slug]   →   move para archive/YYYY-Qn/
 ```
 
 Cada `/` é um slash command em `.claude/commands/`. Veja também o skill `new-feature` que conduz o ciclo todo.
+
+### Outros commands de manutenção
+
+- `/specs-index` — regenera `INDEX.md` lendo o `Status:` de cada spec.
+- `/specs-archive [NNN-slug]` — arquiva uma spec done/abandoned.
 
 ## Por que SDD?
 
@@ -32,9 +44,10 @@ Cada `/` é um slash command em `.claude/commands/`. Veja também o skill `new-f
 
 ## Convenção
 
-- NNN é zero-padded (001, 042, 100…). Próximo número = `max(NNN existente) + 1`.
+- NNN é zero-padded (001, 042, 100…). Próximo número = `max(NNN existente em specs/ E archive/) + 1`.
 - Slug em kebab-case curto (3-5 palavras).
 - Status no topo de `spec.md`: `draft | approved | in-progress | done | abandoned`.
+- Após criar/atualizar uma spec, rode `/specs-index` para manter o `INDEX.md` em sincronia.
 
 ## Quando NÃO usar SDD
 

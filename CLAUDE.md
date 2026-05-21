@@ -31,7 +31,12 @@ Instruções para qualquer agente de IA (Claude Code, Cursor, Copilot etc.) trab
 /implement             →   executa UMA task de cada vez
 ```
 
-Veja `specs/README.md` e `specs/000-example/` como referência. Ou invoque o skill `new-feature`.
+Veja `specs/README.md`, `specs/INDEX.md` (visão por status) e `specs/000-example/` como referência. Ou invoque o skill `new-feature`.
+
+### Manutenção do specs/
+
+- `/specs-index` — regenera `specs/INDEX.md`.
+- `/specs-archive [NNN-slug]` — move spec done/abandoned para `specs/archive/YYYY-Qn/`.
 
 ## Comandos essenciais
 
@@ -57,7 +62,11 @@ src/
 ├── app/             # bootstrap (providers, router, query client)
 ├── routes/          # TanStack Router file-based
 ├── features/        # módulos de negócio (feature-sliced)
-└── shared/          # ui (shadcn), lib, api gerada, hooks
+└── shared/
+    ├── ui/          # design system (Atomic Design: atoms/ molecules/ organisms/)
+    ├── lib/         # http, env, cn, formatters
+    ├── api/         # mutator + generated/ (Orval)
+    └── hooks/       # hooks genéricos sem regra de negócio
 e2e/                 # Playwright
 ```
 

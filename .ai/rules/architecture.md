@@ -17,7 +17,10 @@ src/
 │       ├── components/        # componentes da feature (Page no topo)
 │       └── index.ts           # API pública — só exporta o necessário
 └── shared/      # reutilizável entre features
-    ├── ui/      # design system (shadcn/ui + componentes próprios genéricos)
+    ├── ui/      # design system — Atomic Design
+    │   ├── atoms/      # primitivos shadcn/Radix (Button, Input, Label, Card…)
+    │   ├── molecules/  # composições de átomos sem lógica de negócio (InputWithLabel…)
+    │   └── organisms/  # seções complexas reutilizáveis (ConfirmDialog, DataTable…)
     ├── lib/     # http, env, cn, formatters
     ├── api/     # mutator + generated/ (Orval)
     └── hooks/   # useDebounce, useMediaQuery etc — sem regra de negócio
@@ -54,6 +57,31 @@ Violar isso geralmente significa que você está fazendo cross-feature ou que fa
 - Stores: `useXxxStore` ou `useXxxUiStore` (quando é puro UI state).
 - Schemas: `xxxSchema`, tipo: `Xxx`.
 - Query keys: factory exportada como `xxxKeys`.
+
+## Atomic Design em shared/ui
+
+| Camada      | O que entra                                                   | O que NÃO entra               |
+|-------------|---------------------------------------------------------------|-------------------------------|
+| `atoms/`    | Primitivos shadcn/Radix: Button, Input, Label, Badge, Avatar… | Composições entre átomos      |
+| `molecules/`| Composições de átomos sem lógica de negócio: InputWithLabel…  | Chamadas de API, store, query |
+| `organisms/`| Seções complexas reutilizáveis, podem ter UI state local      | Lógica de negócio, queries    |
+| `features/` | Qualquer coisa com lógica de domínio específica               | —                             |
+
+**Regras de import para shared/ui:**
+
+- Consumers (`features/`, `routes/`) → sempre `import { X } from '@/shared/ui'` (barrel geral)
+- Molecules → podem importar de `@/shared/ui/atoms` (import interno entre subcamadas)
+- Organisms → podem importar de `@/shared/ui/atoms` e `@/shared/ui/molecules`
+- Atoms → sem imports de `shared/ui` (são puros, sem dependências internas)
+
+**NUNCA** importe de uma sublayer diretamente fora de `shared/ui/`: `@/shared/ui/atoms/button` é import interno; consumers usam `@/shared/ui`.
+
+**Guia de decisão — onde colocar um novo componente shared:**
+
+1. É um elemento único sem compor outros shared/ui? → `atoms/`
+2. Combina átomos existentes, sem lógica de negócio? → `molecules/`
+3. Seção complexa reutilizável (pode ter UI state local)? → `organisms/`
+4. Tem lógica de domínio ou chama API? → `features/<name>/components/`
 
 ## Decisões padrão
 

@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { useCreateTodo } from '@/features/todos/hooks/useTodos';
 import { type CreateTodoInput, createTodoInputSchema } from '@/features/todos/schemas';
-import { Button } from '@/shared/ui/button';
-import { Input } from '@/shared/ui/input';
+import { Button, Input } from '@/shared/ui';
 
 export function TodoForm() {
   const createTodo = useCreateTodo();

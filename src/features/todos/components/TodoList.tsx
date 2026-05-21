@@ -1,7 +1,7 @@
 import { useTodosList } from '@/features/todos/hooks/useTodos';
 import { useTodosUiStore } from '@/features/todos/store';
 import { normalizeForSearch } from '@/shared/lib/normalize';
-import { Card, CardContent } from '@/shared/ui/card';
+import { Card, CardContent } from '@/shared/ui';
 
 interface TodoListProps {
   query?: string;

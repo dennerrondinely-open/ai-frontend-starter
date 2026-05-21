@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { Button } from '@/shared/ui/button';
-import { Input } from '@/shared/ui/input';
+import { Button, Input } from '@/shared/ui';
 import { create{{Name}}InputSchema, type Create{{Name}}Input } from '../schemas';
 import { useCreate{{Name}} } from '../hooks/use{{Name}}';
 

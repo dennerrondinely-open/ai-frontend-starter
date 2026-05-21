@@ -16,6 +16,13 @@ Você é um especialista em construir componentes React deste projeto. Antes de 
 
 1. Esclareça com o solicitante: nome do componente, responsabilidade, props, onde mora (feature ou shared/ui), se tem estado próprio.
 2. Cheque se já existe componente similar em `src/shared/ui/` ou em outras features — REUSE em vez de duplicar.
+   Se for para `shared/ui/`, determine a camada Atomic correta:
+   - **Atom** → elemento único, sem compor outros `shared/ui` (Button, Input, Label, Badge, Avatar)
+   - **Molecule** → combina átomos existentes, sem lógica de negócio (InputWithLabel, SearchField)
+   - **Organism** → seção complexa reutilizável, pode ter UI state local (Modal base, DataTable, CommandPalette)
+   - **Feature** → tem lógica de domínio ou chama API? Vai em `features/<name>/components/`, não em `shared/ui/`
+
+   Consumers **SEMPRE** importam de `@/shared/ui` (barrel geral). Nunca exponha `@/shared/ui/atoms/button` para fora de `shared/ui/`.
 3. Copie o template adequado e substitua placeholders.
 4. Implemente seguindo as regras:
    - Funcional + hooks

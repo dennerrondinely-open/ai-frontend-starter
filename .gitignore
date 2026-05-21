@@ -45,3 +45,6 @@ test-results
 
 # msw worker (committed; regenerate via `npx msw init public/`)
 # public/mockServiceWorker.js
+
+# Configuração local (tokens pessoais, MCP)
+.claude/settings.local.json

@@ -38,6 +38,25 @@ Veja `specs/README.md`, `specs/INDEX.md` (visão por status) e `specs/000-exampl
 - `/specs-index` — regenera `specs/INDEX.md`.
 - `/specs-archive [NNN-slug]` — move spec done/abandoned para `specs/archive/YYYY-Qn/`.
 
+## Agentes disponíveis
+
+| Agente | Quando usar |
+|--------|-------------|
+| `component-builder` | Criar componente novo (feature ou shared/ui) |
+| `code-reviewer` | Revisar código antes de commit/PR |
+| `ui-reviewer` | Auditar qualidade visual, a11y e divergências Figma |
+| `spec-writer` | Escrever spec de feature |
+| `plan-writer` | Escrever plano de implementação |
+
+### Figma MCP (opcional)
+
+O agente `ui-reviewer` suporta conexão direta ao Figma para comparar implementação vs. design:
+
+1. Copie `.claude/settings.local.json.example` → `.claude/settings.local.json`
+2. Gere um token em figma.com → Account Settings → Personal access tokens
+3. Substitua `figd_SUBSTITUA_PELO_SEU_TOKEN` pelo token gerado
+4. `settings.local.json` já está no `.gitignore` — nunca commite o token
+
 ## Comandos essenciais
 
 ```bash
